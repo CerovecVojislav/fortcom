@@ -135,6 +135,37 @@
             width: 100%;
         }
 
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 101;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--primary-dark);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         /* Hero Content */
         .hero-content {
             flex: 1;
@@ -177,6 +208,7 @@
             height: auto;
             display: block;
             margin: 0 auto;
+            margin-bottom: 10px;
         }
 
         .tagline {
@@ -394,6 +426,40 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+            }
+
             .logo img {
                 max-width: 280px;
             }
@@ -404,10 +470,6 @@
 
             h2 {
                 font-size: 2.2rem;
-            }
-
-            nav ul {
-                gap: 1.5rem;
             }
 
             section {
@@ -432,7 +494,12 @@
     </div>
 
     <nav>
-        <ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-menu">
             <li><a href="#team">Meet the Team</a></li>
             <li><a href="#how-we-work">How We Work</a></li>
             <li><a href="#difference">What Makes Us Different</a></li>
@@ -527,7 +594,27 @@
                         block: 'start'
                     });
                 }
+                // Close mobile menu after clicking a link
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
             });
+        });
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
         });
     </script>
 </body>
