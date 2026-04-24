@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortkom - Customer Support Outsourcing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Urbanist:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1e3a4f;
+            --primary-medium: #2C4A5C;
+            --accent-teal: #4a9d9c;
+            --accent-light: #6bb8b7;
+            --bg-light: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --text-muted: #6c757d;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section with Pattern Background */
+        .hero {
+            background: var(--primary-medium);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(74, 157, 156, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 85% 70%, rgba(107, 184, 183, 0.1) 0%, transparent 35%);
+            pointer-events: none;
+        }
+
+        /* Illustrated People Pattern */
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.08;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234a9d9c' opacity='0.6'%3E%3Ccircle cx='50' cy='40' r='25'/%3E%3Crect x='35' y='65' width='30' height='50' rx='5'/%3E%3Ccircle cx='150' cy='140' r='20'/%3E%3Crect x='140' y='160' width='20' height='35' rx='3'/%3E%3Cpath d='M 100 180 Q 100 170 110 175 T 120 180' fill='none' stroke='%236bb8b7' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 400px 400px;
+            animation: patternMove 60s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 400px 400px; }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            animation: navSlideDown 0.6s ease-out;
+        }
+
+        @keyframes navSlideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-teal);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-teal);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            background: white;
+            padding: 3rem 4rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+            animation: logoFloat 0.8s ease-out;
+        }
+
+        @keyframes logoFloat {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .tagline {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            text-align: center;
+            max-width: 700px;
+            font-weight: 400;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section:nth-child(even) {
+            background: var(--bg-light);
+        }
+
+        h2 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-teal), var(--accent-light));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .emphasis {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* Expertise Grid */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .expertise-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-teal);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .expertise-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .expertise-item::before {
+            content: '▸';
+            color: var(--accent-teal);
+            font-weight: bold;
+            margin-right: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        /* Key Points */
+        .key-points {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
+            padding: 3rem;
+            border-radius: 16px;
+            color: white;
+            margin: 3rem 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .key-points p {
+            color: white;
+            font-size: 1.15rem;
+            line-height: 2;
+        }
+
+        .key-points .emphasis {
+            color: var(--accent-light);
+            font-weight: 700;
+        }
+
+        /* Bottom Line / CTA */
+        .cta-section {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .cta-section h2 {
+            color: var(--primary-dark);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section h2::after {
+            background: var(--accent-teal);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta-section p {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--accent-teal);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(74, 157, 156, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(74, 157, 156, 0.4);
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInScroll 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInScroll {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.95rem;
+        }
+
+        footer p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        footer a {
+            color: var(--accent-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo img {
+                max-width: 280px;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="pattern-bg"></div>
+        <div class="hero-content">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="fortkom-logo.png" alt="Fortkom Logo">
+                </div>
+            </div>
+            <p class="tagline">We're here to help—fast, friendly, and always focused on your needs.</p>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#team">Meet the Team</a></li>
+            <li><a href="#how-we-work">How We Work</a></li>
+            <li><a href="#difference">What Makes Us Different</a></li>
+            <li><a href="#contact">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <section id="team" class="fade-in">
+        <h2>Meet the Team</h2>
+        <p>We're not a typical eCommerce support team — and we're not trying to be. <span class="emphasis">Fortkom was built by a group of seven specialists</span> who understand a few things better than most: operations break, customers get frustrated, and revenue gets lost in the gaps. That's where we step in.</p>
+        
+        <p>We operate like a <span class="emphasis">fortress behind your business</span> — protecting your revenue, stabilizing your operations, and making sure nothing slips through the cracks.</p>
+
+        <h3>Our team combines hands-on experience in:</h3>
+        <div class="expertise-grid">
+            <div class="expertise-item">Customer Support</div>
+            <div class="expertise-item">Selling Channels Handling and Operations (Walmart, eBay, Amazon)</div>
+            <div class="expertise-item">Dispute & Chargeback Handling</div>
+            <div class="expertise-item">eCommerce Operations</div>
+            <div class="expertise-item">Logistics Coordination</div>
+            <div class="expertise-item">Sales & Retention Strategy</div>
+            <div class="expertise-item">Data Analysis & Process Optimization</div>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 1.2rem; font-weight: 600;">We don't just respond to problems — we build systems that prevent them.</p>
+    </section>
+
+    <section id="how-we-work" class="fade-in">
+        <h2>How We Work</h2>
+        <p>We move fast, adapt faster, and think as a unit. Because we're a team — not a single mind — <span class="emphasis">every challenge is approached from multiple angles</span>. That means better decisions, faster execution, and fewer blind spots.</p>
+
+        <div class="key-points">
+            <p>We specialize in <span class="emphasis">complex, high-friction industries</span>, and we try to find the most efficient SOP in order for everything to run smoothly.</p>
+            
+            <p style="margin-top: 2rem;">In industries where:</p>
+            <p>▸ Fitment issues are common<br>
+               ▸ Returns are frequent<br>
+               ▸ Customers need precise, fast answers</p>
+            
+            <p style="margin-top: 2rem;"><span class="emphasis">This is where most operations struggle.<br>This is where we perform best.</span></p>
+        </div>
+    </section>
+
+    <section id="difference" class="fade-in">
+        <h2>What Makes Us Different</h2>
+        <p>While most teams focus on tickets, <span class="emphasis">we focus on outcomes</span>.</p>
+        
+        <p>We don't plug into your business — <span class="emphasis">we reinforce it</span>.</p>
+
+        <p style="margin-top: 2.5rem; font-size: 1.15rem; line-height: 2;">Unlike typical support teams that treat your operations as a black box, we take the time to understand your systems, your challenges, and your goals. We don't just handle volume — we optimize it. We don't just answer questions — we reduce them. We don't just fix problems — we eliminate the conditions that create them.</p>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <h2>The Bottom Line</h2>
+        <p>If your operations feel chaotic, your support is overwhelmed, or your revenue is leaking — you don't need more agents.</p>
+        <p style="font-size: 1.4rem; font-weight: 700; color: var(--primary-dark);">You need structure. You need strategy. You need a system.<br>You need Fortkom.</p>
+        <a href="#" class="cta-button">Get Started Today</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Fortkom. All rights reserved. | Created by <a href="#">Vojislav Cerovec</a></p>
+    </footer>
+
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
