@@ -684,7 +684,7 @@ footer a:hover {
     nav ul {
         position: fixed;
         top: 0;
-        right: -100%;
+        left: -100%;
         width: 70%;
         height: 100vh;
         background: rgba(255, 255, 255, 0.98);
@@ -693,12 +693,12 @@ footer a:hover {
         justify-content: center;
         align-items: center;
         gap: 2rem;
-        transition: right 0.4s ease;
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        transition: left 0.4s ease;
+        box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
     }
 
     nav ul.active {
-        right: 0;
+        left: 0;
     }
 
     nav a {
